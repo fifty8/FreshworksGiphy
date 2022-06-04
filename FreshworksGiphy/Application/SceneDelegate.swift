@@ -10,13 +10,36 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
-
+    
+    /// Construct the view controller hierarchy: tabbar with children being search and favorite
+    /// view controllers.
+    private func createTabBarController() -> UITabBarController {
+        let searchVC = SearchViewController()
+        let searchNav = UINavigationController(rootViewController: searchVC)
+        searchNav.tabBarItem = UITabBarItem(
+            title: "Search",
+            image: .init(systemName: "magnifyingglass"),
+            selectedImage: nil)
+        
+        let favVC = FavoriteViewController()
+        let favNav = UINavigationController(rootViewController: favVC)
+        favNav.tabBarItem = UITabBarItem(
+            title: "Favorites",
+            image: .init(systemName: "heart"),
+            selectedImage: .init(systemName: "heart.fill"))
+        
+        let tabVC = UITabBarController()
+        tabVC.viewControllers = [searchNav, favNav]
+        
+        return tabVC
+    }
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = scene as? UIWindowScene else { return }
+        let window = UIWindow(windowScene: windowScene)
+        window.rootViewController = createTabBarController()
+        self.window = window
+        window.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
