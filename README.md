@@ -38,11 +38,11 @@ Using thumbnails is another way to optimize for performance. Currently I'm using
 
 ## Miscellaneous
 
-There should be a message when API requests fail, or when the user has 0 favourited GIFs and seeing an empty page. The specifications didn't ask for placeholder/error messages, so I did not implement those.
+- There should be a message when API requests fail, or when the user has 0 favourited GIFs and seeing an empty page. The specifications didn't ask for placeholder/error messages, so I did not implement those.
 
-The specifications didn't say what should come out of tapping a GIF, so I implemented my own:
+- The specifications didn't say what should come out of tapping a GIF, so I implemented my own:
 
-1. For GIFs that are still downloading, an alert tells the user to be patient for the GIF to finish loading
-2. For GIFs that are downloaded (to cache or to disk), a share sheet (UIActivityController) is presented with options to save it to album.
+    1. For GIFs that are still downloading, an alert tells the user to be patient for the GIF to finish loading
+    2. For GIFs that are downloaded (to cache or to disk), a share sheet (UIActivityController) is presented with options to save it to album.
 
-
+- Performance should be better if we use mp4 files for display, in place of GIF UIImage objects.
